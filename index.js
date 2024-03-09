@@ -12,7 +12,7 @@ const readline = require("readline")
 const { parsePhoneNumber } = require("libphonenumber-js")
 
 
-let phoneNumber = "916909137213"
+let phoneNumber = "226xxxxxxxx"
 
 const pairingCode = !!phoneNumber || process.argv.includes("--pairing-code")
 const useMobile = process.argv.includes("--mobile")
@@ -26,7 +26,7 @@ const question = (text) => new Promise((resolve) => rl.question(text, resolve))
 let { version, isLatest } = await fetchLatestBaileysVersion()
 const {  state, saveCreds } =await useMultiFileAuthState(`./sessions`)
     const msgRetryCounterCache = new NodeCache() // for retry message, "waiting message"
-    const XeonBotInc = makeWASocket({
+    const ovl = makeWASocket({
         logger: pino({ level: 'silent' }),
         printQRInTerminal: !pairingCode, // popping up QR in terminal log
       mobile: useMobile, // mobile api (prone to bans)
@@ -51,8 +51,8 @@ const {  state, saveCreds } =await useMultiFileAuthState(`./sessions`)
 
     // login use pairing code
    // source code https://github.com/WhiskeySockets/Baileys/blob/master/Example/example.ts#L61
-   if (pairingCode && !XeonBotInc.authState.creds.registered) {
-      if (useMobile) throw new Error('Cannot use pairing code with mobile api')
+   if (pairingCode && !ovl.authState.creds.registered) {
+      if (useMobile) throw new Error('impossible d utuliser')
 
       let phoneNumber
       if (!!phoneNumber) {
